@@ -31,7 +31,7 @@ const App: React.FC = () => {
                         <Web3ReactManager>
                             <div className={`${Classes.DARK} container`}>
                                 <Switch>
-                                    <Route path={'/'} component={Landing} />
+                                    <Route path={['/', '/home']} component={Landing} />
                                 </Switch>
                             </div>
                         </Web3ReactManager>

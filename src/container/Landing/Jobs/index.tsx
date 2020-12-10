@@ -1,16 +1,12 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { Wrapper } from './styled';
-import { Route, Switch } from 'react-router-dom';
-import { Button, Classes } from '@blueprintjs/core';
-import Navigation from '@app/container/Landing/Navigation';
-import Profile from './Profile';
 import { getCurrentAddress } from '@app/web3/utils';
 import { getPlayerContract } from '@app/web3/contracts';
+import { Button, Classes, NavbarGroup } from '@blueprintjs/core';
 
-const Landing: React.FC = () => {
+const Profile: React.FC = () => {
     const userAddress = getCurrentAddress();
     const playerContract = getPlayerContract();
-
     const [isPlayer, setIsPlayer] = useState(null);
 
     useEffect(() => {
@@ -26,34 +22,18 @@ const Landing: React.FC = () => {
     }, [playerContract]);
 
     if (null == isPlayer) {
-        return (
-            <Wrapper>
-                <h1 className={`${Classes.HEADING} mb-2`}>The Firm</h1>
-                <Navigation />
-                Loading...
-            </Wrapper>
-        );
+        return <div>Loading..</div>;
     }
 
     if (false == isPlayer) {
         return (
-            <Wrapper>
-                <h1 className={`${Classes.HEADING} mb-2`}>The Firm</h1>
-                <Navigation />
+            <div>
                 <Button onClick={createAccount}>Create</Button>
-            </Wrapper>
+            </div>
         );
     }
 
-    return (
-        <Wrapper>
-            <h1 className={`${Classes.HEADING} mb-2`}>The Firm</h1>
-            <Navigation />
-            <Switch>
-                <Route path={'/profile'} component={Profile} />
-            </Switch>
-        </Wrapper>
-    );
+    return <Wrapper>sup</Wrapper>;
 };
 
-export default Landing;
+export default Profile;
