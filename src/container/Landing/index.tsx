@@ -6,6 +6,7 @@ import Navigation from '@app/container/Landing/Navigation';
 import Profile from './Profile';
 import { getCurrentAddress } from '@app/web3/utils';
 import { getPlayerContract } from '@app/web3/contracts';
+import Schemes from '@app/container/Landing/Schemes';
 
 const Landing: React.FC = () => {
     const userAddress = getCurrentAddress();
@@ -51,6 +52,7 @@ const Landing: React.FC = () => {
             <Navigation />
             <Switch>
                 <Route path={'/profile'} component={Profile} />
+                <Route path={'/schemes'} component={Schemes} />
             </Switch>
         </Wrapper>
     );

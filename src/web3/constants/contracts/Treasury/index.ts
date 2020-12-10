@@ -1,5 +1,0 @@
-import TREASURY_ABI from './Treasury.json';
-
-const TREASURY_ADDRESS = '0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9';
-
-export { TREASURY_ADDRESS, TREASURY_ABI };
