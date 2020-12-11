@@ -1,0 +1,34 @@
+import React, { useEffect, useState } from 'react';
+import { Wrapper } from '../styled';
+import { getSchemesContract } from '@app/web3/contracts';
+import Scheme from '@app/container/Landing/Schemes/List/Scheme';
+
+const Schemes: React.FC = () => {
+    const schemesContract = getSchemesContract();
+
+    const [schemes, setSchemes] = useState();
+
+    useEffect(() => {
+        async function getSchemes(): Promise<void> {
+            await schemesContract.listSchemes().then(setSchemes);
+        }
+
+        getSchemes();
+    }, [schemesContract]);
+
+    if (undefined == schemes) {
+        return <div>No schemes</div>;
+    }
+
+    const renderStreamList = (schemes: any[]): any => {
+        return schemes.map((isScheme: boolean, key) => {
+            if (isScheme) {
+                return <Scheme key={key} id={key} />;
+            }
+        });
+    };
+
+    return <Wrapper>{renderStreamList(schemes)}</Wrapper>;
+};
+
+export default Schemes;

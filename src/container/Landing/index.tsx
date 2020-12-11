@@ -52,7 +52,7 @@ const Landing: React.FC = () => {
             <Navigation />
             <Switch>
                 <Route path={'/profile'} component={Profile} />
-                <Route path={'/schemes'} component={Schemes} />
+                <Route path={'/scheme'} component={Schemes} />
             </Switch>
         </Wrapper>
     );

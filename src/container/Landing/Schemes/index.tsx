@@ -1,32 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Wrapper } from './styled';
-import { getSchemesContract } from '@app/web3/contracts';
-import { BigNumber } from 'ethers';
+import { Route, Switch } from 'react-router-dom';
+// Nested
+import List from './List';
+import Single from '@app/container/Landing/Schemes/Single';
 
-const Schemes: React.FC = () => {
-    const schemesContract = getSchemesContract();
-
-    const [schemes, setSchemes] = useState();
-
-    useEffect(() => {
-        async function getSchemes(): Promise<void> {
-            await schemesContract.listActivities().then(setSchemes);
-        }
-
-        getSchemes();
-    }, [schemesContract]);
-
-    if (undefined == schemes) {
-        return <div>No schemes</div>;
-    }
-
-    const renderStreamList = (schemes: any[]): any => {
-        return schemes.map((scheme: BigNumber, key) => {
-            return <div key={key}>{scheme.toString()}hello</div>;
-        });
-    };
-
-    return <Wrapper>{renderStreamList(schemes)}</Wrapper>;
+const SchemeWrapper: React.FC = () => {
+    return (
+        <Wrapper>
+            <Switch>
+                <Route exact path={'/scheme'} component={List} />
+                <Route path={'/scheme/:streamId'} component={Single} />
+            </Switch>
+        </Wrapper>
+    );
 };
 
-export default Schemes;
+export default SchemeWrapper;

@@ -4,7 +4,6 @@ import { useWeb3React } from '@web3-react/core';
 import { Web3Provider } from '@ethersproject/providers';
 import { useHistory } from 'react-router-dom';
 import { Wallet } from '@app/component/Wallet';
-import { Wrapper } from '@app/container/Landing/styled';
 
 const Navigation: React.FC = () => {
     const { active } = useWeb3React<Web3Provider>();
@@ -17,7 +16,7 @@ const Navigation: React.FC = () => {
                 <Button icon={'home'} onClick={() => history.push('/home')} className={Classes.MINIMAL}>
                     Home
                 </Button>
-                <Button icon={'dollar'} onClick={() => history.push('/schemes')} className={Classes.MINIMAL}>
+                <Button icon={'dollar'} onClick={() => history.push('/scheme')} className={Classes.MINIMAL}>
                     Schemes
                 </Button>
                 <Button icon={'walk'} onClick={() => history.push('/train')} className={Classes.MINIMAL}>
