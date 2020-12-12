@@ -8,6 +8,7 @@ import {
 } from '@app/web3/constants/contracts/Player';
 
 import {
+    BASE_SCHEME_ABI,
     SCHEMES_ABI,
     SCHEMES_ADDRESS,
     SCROUNGE_FOR_SATOCHIS_ABI,
@@ -26,6 +27,10 @@ export function getPlayerStatsContract(): Contract | null {
 
 export function getSchemesContract(): Contract | null {
     return useContract(SCHEMES_ADDRESS, SCHEMES_ABI.abi, true);
+}
+
+export function getSchemeContractByAddress(address: string): Contract | null {
+    return useContract(address, BASE_SCHEME_ABI.abi, true);
 }
 
 export function getScroungeForSatochisContract(): Contract | null {

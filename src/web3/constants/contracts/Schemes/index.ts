@@ -1,6 +1,7 @@
 import SCHEMES_ABI from './Schemes.json';
 import SCROUNGE_FOR_SATOCHIS_ABI from './ScroungeForSatoshis/ScroungeForSatochis.json';
 import YIELD_FARM_ABI from './YieldFarm/YieldFarm.json';
+import BASE_SCHEME_ABI from './BaseScheme.json';
 
 const SCHEMES_ADDRESS = '0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9';
 const SCROUNGE_FOR_SATOCHIS_ADDRESS = '0x0165878A594ca255338adfa4d48449f69242Eb8F';
@@ -13,4 +14,5 @@ export {
     SCHEMES_ABI,
     SCROUNGE_FOR_SATOCHIS_ABI,
     YIELD_FARM_ABI,
+    BASE_SCHEME_ABI,
 };

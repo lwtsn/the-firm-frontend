@@ -1,27 +1,35 @@
 import React, { useEffect, useState } from 'react';
 import { List, Wrapper } from './styled';
-import { getPlayerStatsContract } from '@app/web3/contracts';
+import { getPlayerContract, getPlayerStatsContract } from '@app/web3/contracts';
 import { getCurrentAddress } from '@app/web3/utils';
 import { PlayerStats } from '@app/model/player/PlayerStats';
 import { PlayerBattleStats } from '@app/model/player/PlayerBattleStats';
+import { BigNumber } from 'ethers';
 
 const Profile: React.FC = () => {
     const address = getCurrentAddress();
+
+    const playerContract = getPlayerContract();
     const playerStatsContract = getPlayerStatsContract();
     const [playerStats, setPlayerStats] = useState<PlayerStats>(undefined);
     const [playerBattleStats, setPlayerBattleStats] = useState<PlayerBattleStats>(undefined);
+    const [playerBalance, setPlayerBalance] = useState<BigNumber>(BigNumber.from(0));
 
     useEffect(() => {
         playerStatsContract.getPlayerStats(address).then((playerStats: PlayerStats) => {
             setPlayerStats(playerStats);
         });
-    }, [playerStatsContract, address, setPlayerStats]);
+    }, [playerStatsContract, address]);
 
     useEffect(() => {
         playerStatsContract.getPlayerBattleStats(address).then((playerBattleStats: PlayerBattleStats) => {
             setPlayerBattleStats(playerBattleStats);
         });
-    }, [playerStatsContract, address, setPlayerBattleStats]);
+    }, [playerStatsContract, address]);
+
+    useEffect(() => {
+        playerContract.getBalance(address).then(setPlayerBalance);
+    }, [playerContract, address]);
 
     if (undefined == playerStats || undefined == playerBattleStats) {
         return <div>Loading..</div>;
@@ -42,6 +50,8 @@ const Profile: React.FC = () => {
                 <li>Defence: {playerBattleStats.baseDefence.toString()}</li>
                 <li>Constitution: {playerBattleStats.baseConstitution.toString()}</li>
             </List>
+
+            <p>You have ${playerBalance.toString()}</p>
         </Wrapper>
     );
 };
