@@ -22,7 +22,6 @@ export const Ongoing = (props: { ongoingScheme: OngoingScheme }) => {
             return;
         }
 
-        console.log(`initializing interval`);
         const completionTime = moment(ongoingScheme._timeCompleting.mul(1000).toNumber());
 
         const interval = setInterval(() => {
@@ -31,7 +30,6 @@ export const Ongoing = (props: { ongoingScheme: OngoingScheme }) => {
         }, 1000);
 
         return () => {
-            console.log(`clearing interval`);
             clearInterval(interval);
         };
     }, [ongoingScheme]); // has no dependency - this will be called on-component-mount
@@ -42,12 +40,6 @@ export const Ongoing = (props: { ongoingScheme: OngoingScheme }) => {
 
     const startTime = moment(ongoingScheme._timeStarted.mul(1000).toNumber());
     const completionTime = moment(ongoingScheme._timeCompleting.mul(1000).toNumber());
-    // let remaining: Duration = moment.duration(completionTime.diff(moment()));
-
-    // setInterval(() => {
-    //     console.log('ok');
-    //     remaining = moment.duration(completionTime.diff(moment()));
-    // }, 1000);
 
     return (
         <Wrapper>
@@ -60,18 +52,4 @@ export const Ongoing = (props: { ongoingScheme: OngoingScheme }) => {
             </h3>
         </Wrapper>
     );
-
-    // const [ongoingScheme, setOngoingScheme] = useState(undefined);
-    //
-    // useEffect(() => {
-    //     schemesContract.getOngoingScheme(address).then(setOngoingScheme);
-    // }, [schemesContract, address]);
-    //
-    //
-    // return (
-    //     <div>
-    //         <p>Start time: {startTime.toDate().toString()}</p>
-    //         <p>Completion time: {completionTime.toDate().toString()}</p>
-    //     </div>
-    // );
 };
