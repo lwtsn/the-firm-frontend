@@ -19,13 +19,6 @@ const SchemeWrapper: React.FC = () => {
         schemesContract.getOngoingScheme(address).then(setOngoingScheme);
     }, [schemesContract, address]);
 
-    // useEffect(() => {
-    //     if (hasOngoingScheme && undefined != ongoingScheme) {
-    //         schemesContract.schemes(ongoingScheme.scheme).then(setScheme);
-    //     }
-    // }, [schemesContract, ongoingScheme, hasOngoingScheme]);
-    //
-
     if (undefined == ongoingScheme) {
         return <div>Loading..</div>;
     }
