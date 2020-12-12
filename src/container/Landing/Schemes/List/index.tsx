@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { Wrapper } from '../styled';
-import { getScroungeForSatochisContract, getYieldFarmContract } from '@app/web3/contracts';
+import { getYieldFarmContract } from '@app/web3/contracts';
 import { Button, Card, Classes, H5 } from '@blueprintjs/core';
 import { useHistory } from 'react-router-dom';
 
 const Schemes: React.FC = () => {
     const yieldFarmContract = getYieldFarmContract();
-    const scroungeForSatochisContract = getScroungeForSatochisContract();
     const history = useHistory();
 
     const [yieldFarm, setYieldFarm] = useState(undefined);
-    const [scroungeForSatochis, setScroungeForSatochis] = useState(undefined);
 
     useEffect(() => {
         async function getYieldFarm(): Promise<void> {
@@ -20,15 +18,7 @@ const Schemes: React.FC = () => {
         getYieldFarm();
     }, [yieldFarmContract]);
 
-    useEffect(() => {
-        async function getScroungeForSatochis(): Promise<void> {
-            await scroungeForSatochisContract.getScheme().then(setScroungeForSatochis);
-        }
-
-        getScroungeForSatochis();
-    }, [scroungeForSatochisContract]);
-
-    if (undefined == yieldFarm || undefined == scroungeForSatochis) {
+    if (undefined == yieldFarm) {
         return <div>Loading schemes</div>;
     }
 

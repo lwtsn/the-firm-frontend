@@ -6,6 +6,7 @@ import {
     PLAYER_STATS_ABI,
     PLAYER_STATS_ADDRESS,
 } from '@app/web3/constants/contracts/Player';
+
 import {
     SCHEMES_ABI,
     SCHEMES_ADDRESS,
