@@ -1,14 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import { getSchemeContractByAddress } from '@app/web3/contracts';
+import React, { useCallback, useEffect, useState } from 'react';
+import { getSchemeContractByAddress, getSchemesContract } from '@app/web3/contracts';
 import { OngoingScheme } from '@app/model/scheme/OngoingScheme';
 import { Scheme } from '@app/model/scheme/Scheme';
 import { Wrapper } from './styled';
 import moment, { Duration } from 'moment';
+import { Button, Card, Classes } from '@blueprintjs/core';
 
 export const Ongoing = (props: { ongoingScheme: OngoingScheme }) => {
     const { ongoingScheme } = props;
 
     const schemeContract = getSchemeContractByAddress(ongoingScheme._schemeAddress);
+    const schemesContract = getSchemesContract();
 
     const [scheme, setScheme] = useState<Scheme>(undefined);
     const [remaining, setRemaining] = useState<Duration>(undefined);
@@ -32,10 +34,18 @@ export const Ongoing = (props: { ongoingScheme: OngoingScheme }) => {
         return () => {
             clearInterval(interval);
         };
-    }, [ongoingScheme]); // has no dependency - this will be called on-component-mount
+    }, [ongoingScheme]);
+
+    const completeScheme = useCallback(() => {
+        schemesContract.completeScheme();
+    }, [schemesContract]);
 
     if (undefined == scheme || undefined == remaining) {
         return <div>Loading</div>;
+    }
+
+    if (0 > remaining.seconds()) {
+        return <Button icon={'eye-open'} text="Complete" className={Classes.BUTTON} onClick={completeScheme} />;
     }
 
     const startTime = moment(ongoingScheme._timeStarted.mul(1000).toNumber());

@@ -1,7 +1,10 @@
-import PLAYER_ABI from './Player.json';
-import PLAYER_STATS_ABI from './PlayerStats.json';
+import PLAYER from '../json/Player.json';
+import PLAYER_STATS from '../json/PlayerStats.json';
 
-const PLAYER_ADDRESS = '0x5FbDB2315678afecb367f032d93F642f64180aa3';
-const PLAYER_STATS_ADDRESS = '0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512';
+const PLAYER_ABI = PLAYER.abi;
+const PLAYER_ADDRESS = PLAYER.address;
+
+const PLAYER_STATS_ABI = PLAYER_STATS.abi;
+const PLAYER_STATS_ADDRESS = PLAYER_STATS.address;
 
 export { PLAYER_ADDRESS, PLAYER_STATS_ADDRESS, PLAYER_STATS_ABI, PLAYER_ABI };

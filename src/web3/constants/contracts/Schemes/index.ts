@@ -1,11 +1,18 @@
-import SCHEMES_ABI from './Schemes.json';
-import SCROUNGE_FOR_SATOCHIS_ABI from './ScroungeForSatoshis/ScroungeForSatochis.json';
-import YIELD_FARM_ABI from './YieldFarm/YieldFarm.json';
-import BASE_SCHEME_ABI from './BaseScheme.json';
+import SHEMES from '@app/web3/constants/contracts/json/Schemes.json';
+import SCROUNGE_FOR_SATOCHIS from '@app/web3/constants/contracts/json/ScroungeForSatochis.json';
+import YIELD_FARM from '@app/web3/constants/contracts/json/YieldFarm.json';
+import BASE_SCHEME from './BaseScheme.json';
 
-const SCHEMES_ADDRESS = '0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9';
-const SCROUNGE_FOR_SATOCHIS_ADDRESS = '0x0165878A594ca255338adfa4d48449f69242Eb8F';
-const YIELD_FARM_ADDRESS = '0x5FC8d32690cc91D4c39d9d3abcBD16989F875707';
+const SCHEMES_ADDRESS = SHEMES.address;
+const SCHEMES_ABI = SHEMES.abi;
+
+const SCROUNGE_FOR_SATOCHIS_ADDRESS = SCROUNGE_FOR_SATOCHIS.address;
+const SCROUNGE_FOR_SATOCHIS_ABI = SCROUNGE_FOR_SATOCHIS.abi;
+
+const YIELD_FARM_ADDRESS = YIELD_FARM.address;
+const YIELD_FARM_ABI = YIELD_FARM.abi;
+
+const BASE_SCHEME_ABI = BASE_SCHEME.abi;
 
 export {
     SCHEMES_ADDRESS,
