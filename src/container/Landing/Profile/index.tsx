@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { List, Wrapper } from './styled';
-import { getPlayerContract, getPlayerStatsContract } from '@app/web3/contracts';
+import { getPlayerContract, getPlayerStatsContract, getTreasuryContract } from '@app/web3/contracts';
 import { getCurrentAddress } from '@app/web3/utils';
 import { PlayerStats } from '@app/model/player/PlayerStats';
 import { PlayerBattleStats } from '@app/model/player/PlayerBattleStats';
@@ -11,6 +11,8 @@ const Profile: React.FC = () => {
 
     const playerContract = getPlayerContract();
     const playerStatsContract = getPlayerStatsContract();
+    const treasuryContract = getTreasuryContract();
+
     const [playerStats, setPlayerStats] = useState<PlayerStats>(undefined);
     const [playerBattleStats, setPlayerBattleStats] = useState<PlayerBattleStats>(undefined);
     const [playerBalance, setPlayerBalance] = useState<BigNumber>(BigNumber.from(0));
@@ -28,8 +30,8 @@ const Profile: React.FC = () => {
     }, [playerStatsContract, address]);
 
     useEffect(() => {
-        playerContract.getBalance(address).then(setPlayerBalance);
-    }, [playerContract, address]);
+        treasuryContract.balances(address).then(setPlayerBalance);
+    }, [treasuryContract, address]);
 
     if (undefined == playerStats || undefined == playerBattleStats) {
         return <div>Loading..</div>;

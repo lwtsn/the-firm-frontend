@@ -5,6 +5,8 @@ import {
     PLAYER_ADDRESS,
     PLAYER_STATS_ABI,
     PLAYER_STATS_ADDRESS,
+    TREASURY_ABI,
+    TREASURY_ADDRESS,
 } from '@app/web3/constants/contracts/Player';
 
 import {
@@ -17,6 +19,7 @@ import {
     YIELD_FARM_ADDRESS,
 } from '@app/web3/constants/contracts/Schemes';
 import { CASH_ABI, CASH_ADDRESS } from '@app/web3/constants/contracts/Cash';
+import { TRAINING_ABI, TRAINING_ADDRESS } from '@app/web3/constants/contracts/Training';
 
 export function getCashContract(): Contract | null {
     return useContract(CASH_ADDRESS, CASH_ABI, true);
@@ -44,4 +47,12 @@ export function getScroungeForSatochisContract(): Contract | null {
 
 export function getYieldFarmContract(): Contract | null {
     return useContract(YIELD_FARM_ADDRESS, YIELD_FARM_ABI, true);
+}
+
+export function getTreasuryContract(): Contract | null {
+    return useContract(TREASURY_ADDRESS, TREASURY_ABI, true);
+}
+
+export function getTrainingContract(): Contract | null {
+    return useContract(TRAINING_ADDRESS, TRAINING_ABI, true);
 }

@@ -28,8 +28,6 @@ const Single: React.FC = () => {
         return <div>Loading schemes</div>;
     }
 
-    console.log(scheme._duration.toString());
-
     return (
         <Wrapper>
             <Card>
