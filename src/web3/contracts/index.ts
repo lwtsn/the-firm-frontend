@@ -20,6 +20,7 @@ import {
 } from '@app/web3/constants/contracts/Schemes';
 import { CASH_ABI, CASH_ADDRESS } from '@app/web3/constants/contracts/Cash';
 import { TRAINING_ABI, TRAINING_ADDRESS } from '@app/web3/constants/contracts/Training';
+import { BASE_WEAPON_ABI, SHOP_ABI, SHOP_ADDRESS } from '@app/web3/constants/contracts/Shop';
 
 export function getCashContract(): Contract | null {
     return useContract(CASH_ADDRESS, CASH_ABI, true);
@@ -55,4 +56,12 @@ export function getTreasuryContract(): Contract | null {
 
 export function getTrainingContract(): Contract | null {
     return useContract(TRAINING_ADDRESS, TRAINING_ABI, true);
+}
+
+export function getShopContract(): Contract | null {
+    return useContract(SHOP_ADDRESS, SHOP_ABI, true);
+}
+
+export function getItemByAddress(address: string): Contract | null {
+    return useContract(address, BASE_WEAPON_ABI, true);
 }

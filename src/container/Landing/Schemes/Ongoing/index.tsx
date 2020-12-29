@@ -4,7 +4,7 @@ import { OngoingScheme } from '@app/model/scheme/OngoingScheme';
 import { Scheme } from '@app/model/scheme/Scheme';
 import { Wrapper } from './styled';
 import moment, { Duration } from 'moment';
-import { Button, Card, Classes } from '@blueprintjs/core';
+import { Button, Classes } from '@blueprintjs/core';
 
 export const Ongoing = (props: { ongoingScheme: OngoingScheme }) => {
     const { ongoingScheme } = props;
@@ -45,7 +45,12 @@ export const Ongoing = (props: { ongoingScheme: OngoingScheme }) => {
     }
 
     if (0 > remaining.seconds()) {
-        return <Button icon={'eye-open'} text="Complete" className={Classes.BUTTON} onClick={completeScheme} />;
+        return (
+            <div>
+                <h3>Scheme finished</h3>
+                <Button icon={'eye-open'} text="Complete" className={Classes.BUTTON} onClick={completeScheme} />
+            </div>
+        );
     }
 
     const startTime = moment(ongoingScheme._timeStarted.mul(1000).toNumber());
