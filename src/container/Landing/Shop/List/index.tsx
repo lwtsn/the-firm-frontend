@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Wrapper } from '../styled';
+import { Wrapper } from './styled';
 import Item from '@app/container/Landing/Shop/List/Item';
 import { getShopContract } from '@app/web3/contracts';
 

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Wrapper } from '../styled';
+import { ItemWrapper } from './styled';
 import { getItemByAddress, getShopContract } from '@app/web3/contracts';
 import { Button, Card, Classes, H4, H5 } from '@blueprintjs/core';
-import { SingleItem } from '@app/model/shop/Item';
+import { ShopItem } from '@app/model/shop/Item';
 import { fromEtherToNumber } from '@app/lib/numbers';
 import { useHistory } from 'react-router-dom';
 
@@ -13,7 +13,7 @@ const Item = (props) => {
     const shopContract = getShopContract();
     const itemContract = getItemByAddress(address);
 
-    const [shopItem, setShopItem] = useState<SingleItem>(undefined);
+    const [shopItem, setShopItem] = useState<ShopItem>(undefined);
     const [itemName, setItemName] = useState<string>(undefined);
 
     useEffect(() => {
@@ -39,9 +39,9 @@ const Item = (props) => {
     }
 
     return (
-        <Wrapper>
+        <ItemWrapper>
             <Card>
-                <H4>Purchase {itemName}</H4>
+                <H4>{itemName}</H4>
                 <H5>${fromEtherToNumber(shopItem.price)}</H5>
                 <Button
                     icon={'eye-open'}
@@ -51,7 +51,7 @@ const Item = (props) => {
                     View
                 </Button>
             </Card>
-        </Wrapper>
+        </ItemWrapper>
     );
 };
 

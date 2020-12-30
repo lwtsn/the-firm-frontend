@@ -5,6 +5,7 @@ import { getCurrentAddress } from '@app/web3/utils';
 import { PlayerStats } from '@app/model/player/PlayerStats';
 import { PlayerBattleStats } from '@app/model/player/PlayerBattleStats';
 import { BigNumber } from 'ethers';
+import { fromEtherToNumber, fromEtherToNumberWithPlaces } from '@app/lib/numbers';
 
 const Profile: React.FC = () => {
     const address = getCurrentAddress();
@@ -47,10 +48,10 @@ const Profile: React.FC = () => {
                 <li>Level: {playerStats.level.toString()}</li>
                 <li>Experience: {playerStats.experience.toString()}</li>
                 <li>&nbsp;</li>
-                <li>Strength: {playerBattleStats.baseStrength.toString()}</li>
-                <li>Dexterity: {playerBattleStats.baseDexterity.toString()}</li>
-                <li>Defence: {playerBattleStats.baseDefence.toString()}</li>
-                <li>Constitution: {playerBattleStats.baseConstitution.toString()}</li>
+                <li>Strength: {fromEtherToNumberWithPlaces(playerBattleStats.baseStrength, 2)}</li>
+                <li>Dexterity: {fromEtherToNumberWithPlaces(playerBattleStats.baseDexterity, 2)}</li>
+                <li>Defence: {fromEtherToNumberWithPlaces(playerBattleStats.baseDefence, 2)}</li>
+                <li>Constitution: {fromEtherToNumberWithPlaces(playerBattleStats.baseConstitution, 2)}</li>
             </List>
 
             <p>You have ${playerBalance.toString()}</p>

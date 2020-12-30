@@ -6,3 +6,7 @@ export const MAX_INT = '11579208923731619542357098500868790785326998466564056403
 export function fromEtherToNumber(number: BigNumber): string {
     return number.div(oneEther).toString();
 }
+
+export function fromEtherToNumberWithPlaces(number: BigNumber, decimalPlaces: number): number {
+    return number.div(BigNumber.from(10).pow(16)).toNumber() / 100;
+}

@@ -1,5 +1,5 @@
-import { SingleItem } from './Item';
+import { ShopItem } from './Item';
 
 export interface Items {
-    items: SingleItem[];
+    items: ShopItem[];
 }
