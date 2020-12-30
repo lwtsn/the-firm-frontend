@@ -21,10 +21,18 @@ const List: React.FC = () => {
     }
 
     const renderItem = (itemAddress): JSX.Element => {
-        return <Item key={itemAddress} address={itemAddress} />;
+        return (
+            <div key={itemAddress} className={'col-xs-4'}>
+                <Item address={itemAddress} />
+            </div>
+        );
     };
 
-    return <Wrapper>{items[0].map((itemAddress) => renderItem(itemAddress))}</Wrapper>;
+    return (
+        <Wrapper>
+            <div className={'row mb-1'}>{items[0].map((itemAddress) => renderItem(itemAddress))}</div>
+        </Wrapper>
+    );
 };
 
 export default List;

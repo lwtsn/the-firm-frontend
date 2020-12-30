@@ -6,6 +6,7 @@ import Navigation from '@app/container/Landing/Navigation';
 import Profile from './Profile';
 import { getCurrentAddress } from '@app/web3/utils';
 import { getPlayerContract } from '@app/web3/contracts';
+import Home from '@app/container/Landing/Home';
 import Schemes from '@app/container/Landing/Schemes';
 import Training from '@app/container/Landing/Training';
 import ShopFront from '@app/container/Landing/Shop';
@@ -24,6 +25,12 @@ const Landing: React.FC = () => {
 
         isPlayer();
     }, [userAddress, playerContract, setIsPlayer]);
+
+    if (isPlayer == false) {
+        playerContract.once('PlayerCreated', () => {
+            window.location.reload();
+        });
+    }
 
     const createAccount = useCallback(async () => {
         await playerContract.create();
@@ -54,6 +61,7 @@ const Landing: React.FC = () => {
             <h1 className={`${Classes.HEADING} mb-2`}>The Firm</h1>
             <Navigation />
             <Switch>
+                <Route path={'/home'} component={Home} />
                 <Route path={'/profile'} component={Profile} />
                 <Route path={'/scheme'} component={Schemes} />
                 <Route path={'/training'} component={Training} />

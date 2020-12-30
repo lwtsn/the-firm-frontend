@@ -1,7 +1,6 @@
 import React from 'react';
 import { Wrapper } from '../styled';
-import { Button, Card, Classes, H3, H4 } from '@blueprintjs/core';
-import { useHistory } from 'react-router-dom';
+import { Card, H3 } from '@blueprintjs/core';
 import { IndustryList } from '@app/model/implementation/job';
 import { Job as JobModel } from '@app/model/job/Job';
 

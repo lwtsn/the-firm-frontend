@@ -11,8 +11,8 @@ import {
 
 import {
     BASE_SCHEME_ABI,
-    SCHEMES_ABI,
-    SCHEMES_ADDRESS,
+    SCHEME_MANAGER_ABI,
+    SCHEME_MANAGER_ADDRESS,
     SCROUNGE_FOR_SATOCHIS_ABI,
     SCROUNGE_FOR_SATOCHIS_ADDRESS,
     YIELD_FARM_ABI,
@@ -35,7 +35,7 @@ export function getPlayerStatsContract(): Contract | null {
 }
 
 export function getSchemesContract(): Contract | null {
-    return useContract(SCHEMES_ADDRESS, SCHEMES_ABI, true);
+    return useContract(SCHEME_MANAGER_ADDRESS, SCHEME_MANAGER_ABI, true);
 }
 
 export function getSchemeContractByAddress(address: string): Contract | null {
