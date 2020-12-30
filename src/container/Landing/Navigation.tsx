@@ -38,6 +38,9 @@ const Navigation: React.FC = () => {
                 <Button icon={'walk'} onClick={() => history.push('/training')} className={Classes.MINIMAL}>
                     Train
                 </Button>
+                <Button icon={'briefcase'} onClick={() => history.push('/job')} className={Classes.MINIMAL}>
+                    Job
+                </Button>
                 <Button icon={'shop'} onClick={() => history.push('/shop')} className={Classes.MINIMAL}>
                     Shop
                 </Button>

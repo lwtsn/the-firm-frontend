@@ -9,6 +9,7 @@ import { getPlayerContract } from '@app/web3/contracts';
 import Schemes from '@app/container/Landing/Schemes';
 import Training from '@app/container/Landing/Training';
 import ShopFront from '@app/container/Landing/Shop';
+import Jobs from '@app/container/Landing/Jobs';
 
 const Landing: React.FC = () => {
     const userAddress = getCurrentAddress();
@@ -57,6 +58,7 @@ const Landing: React.FC = () => {
                 <Route path={'/scheme'} component={Schemes} />
                 <Route path={'/training'} component={Training} />
                 <Route path={'/shop'} component={ShopFront} />
+                <Route path={'/job'} component={Jobs} />
             </Switch>
         </Wrapper>
     );
