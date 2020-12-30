@@ -20,10 +20,11 @@ const FastFoodWorker: Job = {
     name: 'Fast food worker',
 };
 
-const SecondHandCarSales: Job = {
+const DayTrader: Job = {
     salary: 4500,
-    description: "Most of these are long  due scrapping, you don't care first time buyers will believe anything.",
-    name: 'Car sales',
+    description:
+        "You've joined dozens of telegram groups, you watch the markets 24/7 and to be honest, you're quite good.",
+    name: 'Day Trading',
 };
 
 const CorporateSales: Job = {
@@ -42,6 +43,6 @@ const Executive: Job = {
 
 export const Degenerate: Industry = {
     description: 'Only for the biggest Chads around, high risk jobs lead to high reward',
-    jobs: [VideoGamer, LarpOnTwitter, FastFoodWorker, SecondHandCarSales, CorporateSales, Executive],
+    jobs: [VideoGamer, LarpOnTwitter, FastFoodWorker, DayTrader, CorporateSales, Executive],
     name: 'Degenerate',
 };
