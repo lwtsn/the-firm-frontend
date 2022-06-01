@@ -5,12 +5,11 @@ import { getCurrentAddress } from '@app/web3/utils';
 import { PlayerStats } from '@app/model/player/PlayerStats';
 import { PlayerBattleStats } from '@app/model/player/PlayerBattleStats';
 import { BigNumber } from 'ethers';
-import { fromEtherToNumber, fromEtherToNumberWithPlaces } from '@app/lib/numbers';
+import { fromEtherToNumberWithPlaces } from '@app/lib/numbers';
 
 const Profile: React.FC = () => {
     const address = getCurrentAddress();
 
-    const playerContract = getPlayerContract();
     const playerStatsContract = getPlayerStatsContract();
     const treasuryContract = getTreasuryContract();
 

@@ -20,17 +20,17 @@ const List: React.FC = () => {
         return <div>Loading..</div>;
     }
 
-    const renderItem = (itemAddress): JSX.Element => {
+    const renderItem = (id): JSX.Element => {
         return (
-            <div key={itemAddress} className={'col-xs-4'}>
-                <Item address={itemAddress} />
+            <div key={id} className={'col-xs-4'}>
+                <Item id={id} />
             </div>
         );
     };
 
     return (
         <Wrapper>
-            <div className={'row mb-1'}>{items[0].map((itemAddress) => renderItem(itemAddress))}</div>
+            <div className={'row mb-1'}>{items[0].map((id) => renderItem(id))}</div>
         </Wrapper>
     );
 };

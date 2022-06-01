@@ -9,7 +9,7 @@ const ShopFront: React.FC = () => {
         <Wrapper>
             <Switch>
                 <Route exact path={'/shop'} component={List} />
-                <Route exact path={'/shop/item/:address'} component={Single} />
+                <Route exact path={'/shop/item/:id'} component={Single} />
             </Switch>
         </Wrapper>
     );

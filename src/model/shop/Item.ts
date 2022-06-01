@@ -7,5 +7,5 @@ export interface ShopItem {
 
 export interface Item {
     image: string;
-    description: string;
+    name: string;
 }

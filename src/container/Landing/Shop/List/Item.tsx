@@ -1,53 +1,26 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { ItemWrapper } from './styled';
-import { getItemByAddress, getShopContract } from '@app/web3/contracts';
 import { Button, Card, Classes, H4, H5 } from '@blueprintjs/core';
-import { ShopItem } from '@app/model/shop/Item';
 import { fromEtherToNumber } from '@app/lib/numbers';
 import { useHistory } from 'react-router-dom';
+import { useItem } from '@app/hooks/useItem';
 
-const Item = (props) => {
-    const { address } = props;
+const Item = (props): JSX.Element => {
+    const { id } = props;
     const history = useHistory();
 
-    const shopContract = getShopContract();
-    const itemContract = getItemByAddress(address);
+    const { shopItem, item } = useItem(id);
 
-    const [shopItem, setShopItem] = useState<ShopItem>(undefined);
-    const [itemName, setItemName] = useState<string>(undefined);
-
-    useEffect(() => {
-        async function getItem(): Promise<void> {
-            await shopContract.itemStructs(address).then((item) => {
-                setShopItem(item);
-            });
-        }
-
-        getItem();
-    }, [shopContract, address]);
-
-    useEffect(() => {
-        async function getItem(): Promise<void> {
-            await itemContract.name().then(setItemName);
-        }
-
-        getItem();
-    }, [itemContract]);
-
-    if (undefined == shopItem) {
+    if (undefined == shopItem || undefined == item) {
         return <div>Loading..</div>;
     }
-
+    console.log(item);
     return (
         <ItemWrapper>
             <Card>
-                <H4>{itemName}</H4>
+                <H4>{item.name}</H4>
                 <H5>${fromEtherToNumber(shopItem.price)}</H5>
-                <Button
-                    icon={'eye-open'}
-                    onClick={() => history.push(`/shop/item/${address}`)}
-                    className={Classes.MINIMAL}
-                >
+                <Button icon={'eye-open'} onClick={() => history.push(`/shop/item/${id}`)} className={Classes.MINIMAL}>
                     View
                 </Button>
             </Card>

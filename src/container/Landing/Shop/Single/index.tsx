@@ -1,63 +1,48 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import { getItemByAddress, getShopContract } from '@app/web3/contracts';
+import React from 'react';
 import { Wrapper } from './styled';
 import { Button, Classes } from '@blueprintjs/core';
-import { useParams } from 'react-router-dom';
-import { Item, ShopItem } from '@app/model/shop/Item';
+import { useHistory, useParams } from 'react-router-dom';
 
 import { fromEtherToNumber } from '@app/lib/numbers';
-import { findItemByAddress } from '@app/model/implementation/item';
+import { useItem } from '@app/hooks/useItem';
+import { useAllowance } from '@app/hooks/useBalance';
+import { SHOP_ADDRESS } from '@app/web3/constants/contracts/Shop';
+import { BigNumber } from 'ethers';
+import { TREASURY_ADDRESS } from '@app/web3/constants/contracts/Player';
 
 export const Single = () => {
-    const { address } = useParams<{ address: string }>();
+    const { id } = useParams<{ id: string }>();
+    const history = useHistory();
+    const { allowance, approve } = useAllowance(TREASURY_ADDRESS);
+    const { item, shopItem, purchase } = useItem(id);
 
-    const shopContract = getShopContract();
-    const itemContract = getItemByAddress(address);
+    if (undefined == id) {
+        history.push('/');
+    }
 
-    const [item, setItem] = useState<ShopItem>(undefined);
-    const [itemName, setItemName] = useState<string>(undefined);
-
-    useEffect(() => {
-        async function getItem(): Promise<void> {
-            await shopContract.itemStructs(address).then((item) => {
-                setItem(item);
-            });
-        }
-
-        getItem();
-    }, [shopContract, address]);
-
-    useEffect(() => {
-        async function getItem(): Promise<void> {
-            await itemContract.name().then(setItemName);
-        }
-
-        getItem();
-    }, [itemContract]);
-
-    const purchase = useCallback(() => {
-        shopContract.purchase(address, 1).then(console.log);
-    }, [shopContract, address]);
-
-    if (undefined == itemName || undefined == item) {
+    if (undefined == shopItem || undefined == item) {
         return <div>Loading..</div>;
     }
 
-    const itemDetails: Item = findItemByAddress(address);
+    function getCallToAction(): JSX.Element {
+        if (allowance.gt(BigNumber.from(0))) {
+            return <Button icon={'eye-open'} text="Purchase" className={Classes.BUTTON} onClick={() => purchase()} />;
+        } else {
+            return <Button icon={'eye-open'} text="Allow" className={Classes.BUTTON} onClick={() => approve()} />;
+        }
+    }
 
     return (
         <Wrapper>
             <div className={'row mb-1'}>
                 <div className={'col-xs-12'}>
-                    <h2>{itemName}</h2>
-                    <h3>${fromEtherToNumber(item.price)}</h3>
+                    <h2>{item.name}</h2>
+                    <h3>${fromEtherToNumber(shopItem.price)}</h3>
                 </div>
-                <div className={'col-xs-3'}>
-                    <img src={itemDetails.image} width={300} />
-                </div>
+                <div className={'col-xs-3'}>{/*<img src={itemDetails.image} width={300} />*/}</div>
                 <div className={'col-xs-9'}>
-                    <p>{itemDetails.description}</p>
-                    <Button icon={'eye-open'} text="Purchase" className={Classes.BUTTON} onClick={purchase} />
+                    {/*<p>{itemDetails.description}</p>*/}
+                    {getCallToAction()}
                 </div>
             </div>
         </Wrapper>
