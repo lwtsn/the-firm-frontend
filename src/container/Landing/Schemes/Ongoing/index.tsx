@@ -40,6 +40,10 @@ export const Ongoing = (props: { ongoingScheme: OngoingScheme }) => {
         schemesContract.completeScheme();
     }, [schemesContract]);
 
+    const skipScheme = useCallback(() => {
+        schemesContract.skipScheme();
+    }, [schemesContract]);
+
     if (undefined == scheme || undefined == remaining) {
         return <div>Loading</div>;
     }
@@ -65,6 +69,7 @@ export const Ongoing = (props: { ongoingScheme: OngoingScheme }) => {
                 Remaining: {remaining.days()} {'  '}
                 {remaining.hours()}:{remaining.minutes()}:{remaining.seconds()}
             </h3>
+            <Button icon={'eye-open'} text="Skip" className={Classes.BUTTON} onClick={skipScheme} />
         </Wrapper>
     );
 };

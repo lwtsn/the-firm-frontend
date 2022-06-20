@@ -5,7 +5,7 @@ import { Web3Provider } from '@ethersproject/providers';
 import { useHistory } from 'react-router-dom';
 import { Wallet } from '@app/component/Wallet';
 import { getCashContract } from '@app/web3/contracts';
-import { BigNumber } from 'ethers';
+import { BigNumber, ethers } from 'ethers';
 import { getCurrentAddress } from '@app/web3/utils';
 
 const Navigation: React.FC = () => {
@@ -47,7 +47,7 @@ const Navigation: React.FC = () => {
             </NavbarGroup>
             <NavbarGroup align={Alignment.RIGHT}>
                 <Button className={'mr-1'} minimal={true} icon={'bank-account'}>
-                    ${balance.toString()}
+                    ${ethers.utils.formatEther(balance)}
                 </Button>
                 <Button onClick={() => setShouldShowConnectWallet(true)} className={'mr-1'}>
                     {active ? 'Disconnect Wallet' : 'Connect Wallet'}

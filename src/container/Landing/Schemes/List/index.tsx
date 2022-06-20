@@ -1,15 +1,23 @@
 import React from 'react';
 import { Wrapper } from '../styled';
 import Scheme from '@app/container/Landing/Schemes/List/Scheme';
+import { useSchemes } from '@app/hooks/useScheme';
 
 const Schemes: React.FC = () => {
-    return (
-        <Wrapper>
-            {/*<Scheme id={1} />*/}
-            {/*<Scheme id={2} />*/}
-            <Scheme id={3} />
-        </Wrapper>
-    );
+    const { schemeList } = useSchemes();
+
+    const renderSchemes = (): JSX.Element[] => {
+        console.log(schemeList);
+        return schemeList.map((isScheme: boolean, key) => {
+            const schemeAddress = schemeList[key][key];
+
+            if (isScheme) {
+                return <Scheme key={key} id={key} address={schemeAddress} />;
+            }
+        });
+    };
+
+    return <Wrapper>{renderSchemes()}</Wrapper>;
 };
 
 export default Schemes;

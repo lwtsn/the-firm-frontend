@@ -1,24 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Wrapper } from '../styled';
-import { getSchemesContract } from '@app/web3/contracts';
-import { ListedScheme } from '@app/model/scheme/ListedScheme';
 import { Button, Card, Classes, H5 } from '@blueprintjs/core';
 import { useHistory } from 'react-router-dom';
+import { useScheme } from '@app/hooks/useScheme';
 
-const Scheme = (props) => {
-    const { id } = props;
+const Scheme = (props: { id: number; address: string }): JSX.Element => {
+    const { id, address } = props;
     const history = useHistory();
 
-    const schemesContract = getSchemesContract();
-    const [scheme, setScheme] = useState<ListedScheme>(undefined);
-
-    useEffect(() => {
-        async function getScheme(): Promise<void> {
-            await schemesContract.schemes(id).then(setScheme);
-        }
-
-        getScheme();
-    }, [id, schemesContract]);
+    const { scheme } = useScheme(address);
 
     if (undefined == scheme) {
         return <div>Scheme not found</div>;
@@ -27,10 +17,10 @@ const Scheme = (props) => {
     return (
         <Wrapper>
             <Card>
-                <H5>Test scheme</H5>
+                <H5>{scheme._name}</H5>
                 <p>Test scheme</p>
                 <Button
-                    onClick={() => history.push(`/scheme/${id}/${scheme.schemeAddress}`)}
+                    onClick={() => history.push(`/scheme/${id}/${address}`)}
                     icon={'eye-open'}
                     text="Enter the farm"
                     className={Classes.BUTTON}
